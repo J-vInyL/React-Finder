@@ -9,23 +9,44 @@ function LandingPage() {
   const [Product, setProduct] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
+  const [PostSize, setPostSize] = useState(0);
 
   useEffect(() => {
     let body = {
       skip: Skip,
       limit: Limit
     };
+    getProducts(body);
+  }, []);
 
+  const getProducts = body => {
     axios.post("/api/product/products", body).then(response => {
       if (response.data.success) {
-        setProduct(response.data.productInfo);
+        if (body.loadMore) {
+          setProduct([...Product, ...response.data.productInfo]);
+        } else {
+          setProduct(response.data.productInfo);
+        }
+        setPostSize(response.data.postSize);
       } else {
         alert("상품을 가져오는데 실패 했습니다.");
       }
     });
-  }, []);
+  };
 
-  const loadMoreHandler = () => {};
+  const loadMoreHandler = () => {
+    let skip = Skip + Limit;
+    // 0 = 0 + 8 = 8
+    // 8 = 8+ 8 = 16
+    let body = {
+      skip: skip, //Skip 을 사용하면 Skip이 위에 let skip을 활용못하고 계속 0 으로 돌아가기 때문에 홈페이지 더보기를 누르면 0번째 사진부터 다시 보여줌 그래서 새로운 skip 을 사용
+      limit: Limit,
+      loadMore: true
+    };
+
+    getProducts(body);
+    setSkip(skip);
+  };
 
   const renderCards = Product.map((product, index) => {
     console.log("product", product);
@@ -53,11 +74,14 @@ function LandingPage() {
 
       {/* Cards */}
 
-      <Row>{renderCards}</Row>
+      <Row gutter={[16, 16]}>{renderCards}</Row>
+      <br />
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button onClick={loadMoreHandler}>더보기</button>
-      </div>
+      {PostSize >= Limit && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={loadMoreHandler}>더보기</button>
+        </div>
+      )}
     </div>
   );
 }
