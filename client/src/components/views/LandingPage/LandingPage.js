@@ -3,12 +3,20 @@ import { FaCode } from "react-icons/fa";
 import axios from "axios";
 import { Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
+import ImageSlider from "../../util/ImageSlider";
 
 function LandingPage() {
   const [Product, setProduct] = useState([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
 
   useEffect(() => {
-    axios.post("/api/product/products").then(response => {
+    let body = {
+      skip: Skip,
+      limit: Limit
+    };
+
+    axios.post("/api/product/products", body).then(response => {
       if (response.data.success) {
         setProduct(response.data.productInfo);
       } else {
@@ -17,12 +25,14 @@ function LandingPage() {
     });
   }, []);
 
+  const loadMoreHandler = () => {};
+
   const renderCards = Product.map((product, index) => {
     console.log("product", product);
 
     return (
       <Col lg={6} md={8} xs={24} key={index}>
-        <Card cover={<img src={`http://localhost:5000/${product.image[0]}`} />}>
+        <Card cover={<ImageSlider image={product.image} />}>
           <Meta title={product.title} description={`${product.price} 원`} />
         </Card>
       </Col>
@@ -46,7 +56,7 @@ function LandingPage() {
       <Row>{renderCards}</Row>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>더보기</button>
+        <button onClick={loadMoreHandler}>더보기</button>
       </div>
     </div>
   );
