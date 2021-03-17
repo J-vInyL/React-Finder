@@ -1,18 +1,12 @@
-Hello, My Friends  
-Thank you for having interest in this repository ! 
+※ 상품을 등록하거나 수정하는 기능은 관리자 계정으로만 이용할 수 있습니다.
 
-To use this application, 
+Email :
+Password :
 
-1. make dev.js file inside config folder 
-2. put mongoDB info into dev.js file 
-3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+※ 회원가입이 번거로우신 분들은 아래의 계정을 이용해 주세요.
 
+Email :
+Password:
 
-If you have problem, feel free to ask me ^^ 
-
-You can watch the tutorial for this app.
-
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
-
-
+1. 기능 소개
+1. Auth 🔐
