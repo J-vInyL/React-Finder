@@ -4,6 +4,8 @@ import axios from "axios";
 import { Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../util/ImageSlider";
+import FilterMenu from "./Sections/FilterMenu";
+import { brand } from "./Sections/Datas";
 
 function LandingPage() {
   const [Product, setProduct] = useState([]);
@@ -69,6 +71,9 @@ function LandingPage() {
       </div>
 
       {/* Filter */}
+
+      {/* Menu */}
+      <FilterMenu list={brand} />
 
       {/* Search */}
 
