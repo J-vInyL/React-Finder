@@ -49,7 +49,18 @@ router.post("/products", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
-  Product.find()
+  var findArgs = {};
+
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      console.log("key", key);
+
+      findArgs[key] = req.body.filters[key];
+    }
+  }
+
+  console.log("findargs", findArgs);
+  Product.find(findArgs)
     .populate("writer")
     .skip(skip)
     .limit(limit) //처음 페이지 부분  몇개 가줘올지 설정

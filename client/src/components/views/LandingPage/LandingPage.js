@@ -5,13 +5,15 @@ import { Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../util/ImageSlider";
 import FilterMenu from "./Sections/FilterMenu";
-import { brand } from "./Sections/Datas";
+import PriceMenu from "./Sections/PriceMenu";
+import { brand, price } from "./Sections/Datas";
 
 function LandingPage() {
   const [Product, setProduct] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
+  const [Filters, setFilters] = useState({ brand: [], price: [] });
 
   useEffect(() => {
     let body = {
@@ -51,7 +53,7 @@ function LandingPage() {
   };
 
   const renderCards = Product.map((product, index) => {
-    console.log("product", product);
+    //console.log("product", product);
 
     return (
       <Col lg={6} md={8} xs={24} key={index}>
@@ -61,6 +63,44 @@ function LandingPage() {
       </Col>
     );
   });
+  const showFilterResults = filters => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      filters: filters
+    };
+
+    getProducts(body);
+    setSkip(0);
+  };
+
+  const handleprice = value => {
+    const data = price;
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value, 10)) {
+        array = data[key].array;
+      }
+    }
+    return array;
+  };
+
+  const handleFilters = (filters, category) => {
+    const newFilters = { ...Filters };
+
+    newFilters[category] = filters;
+
+    console.log("filters", filters);
+
+    if (category === "price") {
+      let pricevalues = handleprice(filters);
+      newFilters[category] = pricevalues;
+    }
+
+    showFilterResults(newFilters);
+    setFilters(newFilters);
+  };
 
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
@@ -71,9 +111,22 @@ function LandingPage() {
       </div>
 
       {/* Filter */}
-
-      {/* Menu */}
-      <FilterMenu list={brand} />
+      <Row gutter={[16, 16]}>
+        <Col lg={12} xs={24}>
+          {/* FilterMenu */}
+          <FilterMenu
+            list={brand}
+            handleFilters={filters => handleFilters(filters, "brand")}
+          />
+        </Col>
+        <Col lg={12} xs={24}>
+          {/* FilterMenu */}
+          <PriceMenu
+            list={price}
+            handleFilters={filters => handleFilters(filters, "price")}
+          />
+        </Col>
+      </Row>
 
       {/* Search */}
 
