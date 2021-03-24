@@ -86,16 +86,32 @@ function LandingPage() {
     return array;
   };
 
+  const handleBrand = value => {
+    const data = brand;
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value, 10)) {
+        array = data[key].array;
+      }
+    }
+    return array;
+  };
+
   const handleFilters = (filters, category) => {
     const newFilters = { ...Filters };
 
-    newFilters[category] = filters;
+    //console.log("what filters", category);
 
-    console.log("filters", filters);
-
+    if (category === "brand") {
+      let brandValues = handleBrand(filters);
+      newFilters[category] = brandValues;
+      console.log("what filters", newFilters);
+    }
     if (category === "price") {
-      let pricevalues = handleprice(filters);
-      newFilters[category] = pricevalues;
+      let prcieValues = handleprice(filters);
+      newFilters[category] = prcieValues;
+      console.log("what filters123", newFilters);
     }
 
     showFilterResults(newFilters);
@@ -120,7 +136,7 @@ function LandingPage() {
           />
         </Col>
         <Col lg={12} xs={24}>
-          {/* FilterMenu */}
+          {/* PriceMenu  */}
           <PriceMenu
             list={price}
             handleFilters={filters => handleFilters(filters, "price")}

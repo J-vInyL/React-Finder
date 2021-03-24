@@ -6,25 +6,21 @@ const SubMenu = Menu.SubMenu;
 function FilterMenu(props) {
   const [Checked, setChecked] = useState([]);
 
-  const handleToggle = value => {
-    const currentIndex = Checked.indexOf(value);
-
-    const newChecked = [...Checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-    props.handleFilters(newChecked);
+  const handleChange = values => {
+    const current = Checked;
+    setChecked(values);
+    props.handleFilters(current);
+    //console.log("filtercurrent", current);
   };
 
   const renderBrandList = () =>
     props.list &&
-    props.list.map((value, index) => (
-      <Menu.Item key={index} onClick={() => handleToggle(value._id)}>
+    props.list.map(value => (
+      <Menu.Item
+        key={value._id}
+        onClick={() => handleChange(value._id)}
+        value={value._id}
+      >
         <span>{value.name}</span>
       </Menu.Item>
     ));
