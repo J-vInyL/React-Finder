@@ -106,12 +106,12 @@ function LandingPage() {
     if (category === "brand") {
       let brandValues = handleBrand(filters);
       newFilters[category] = brandValues;
-      console.log("what filters", newFilters);
+      //console.log("what filters", newFilters);
     }
     if (category === "price") {
       let prcieValues = handleprice(filters);
       newFilters[category] = prcieValues;
-      console.log("what filters123", newFilters);
+      //console.log("what filters123", newFilters);
     }
 
     showFilterResults(newFilters);
