@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-
-import SearchFeature from "./SearchFeature";
-//const SubMenu = Menu.SubMenu;
-//const MenuItemGroup = Menu.ItemGroup;
+import React from "react";
+import { Menu } from "antd";
+//import SearchFeature from "../../LandingPage/Sections/SearchFeature";
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
-  const [SearchTerm, setSearchTerm] = useState("");
-
-  const updateSearchTerm = newSearchTerm => {
-    setSearchTerm(newSearchTerm);
-  };
-
   return (
-    <div
+    /*<div
       style={{
         display: "flex",
         justifyContent: "flex-end",
         margin: "1rem auto"
       }}
     >
-      <SearchFeature refreshFunction={updateSearchTerm} />
-    </div>
+      <SearchFeature />
+    </div>*/
 
-    /* <Menu mode={props.mode}>
+    <Menu mode={props.mode}>
       <Menu.Item key="mail">
         <a href="/">Home</a>
       </Menu.Item>
@@ -34,8 +28,8 @@ function LeftMenu(props) {
           <Menu.Item key="setting:3">Option 3</Menu.Item>
           <Menu.Item key="setting:4">Option 4</Menu.Item>
         </MenuItemGroup>
-  </SubMenu>
-    </Menu>*/
+      </SubMenu>
+    </Menu>
   );
 }
 

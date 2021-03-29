@@ -6,6 +6,7 @@ import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../util/ImageSlider";
 import FilterMenu from "./Sections/FilterMenu";
 import PriceMenu from "./Sections/PriceMenu";
+import SearchFeature from "./Sections/SearchFeature";
 import { brand, price } from "./Sections/Datas";
 
 function LandingPage() {
@@ -14,6 +15,7 @@ function LandingPage() {
   const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({ brand: [], price: [] });
+  const [SearchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     let body = {
@@ -118,6 +120,18 @@ function LandingPage() {
     setFilters(newFilters);
   };
 
+  const updateSearchTerm = newSearchTerm => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      filters: Filters,
+      searchTerm: newSearchTerm
+    };
+    setSkip(0);
+    setSearchTerm(newSearchTerm);
+    getProducts(body);
+  };
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -145,6 +159,15 @@ function LandingPage() {
       </Row>
 
       {/* Search */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          margin: "1rem auto"
+        }}
+      >
+        <SearchFeature refreshFunction={updateSearchTerm} />
+      </div>
 
       {/* Cards */}
 
