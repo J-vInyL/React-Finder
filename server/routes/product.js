@@ -108,9 +108,16 @@ router.get("/products_by_id", (req, res) => {
   //productId 를 이용해서 DB에서 productID와 같은  상품의 정보를 가져온다.
 
   let type = req.query.type;
-  let productId = req.query.id;
+  let productIds = req.query.id;
 
-  Product.find({ _id: productId })
+  if (type === "array") {
+    let ids = req.query.id.split(",");
+    productIds = ids.map(item => {
+      return item;
+    });
+  }
+
+  Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((err, product) => {
       if (err) return res.status(400).send(err);
