@@ -6,7 +6,7 @@ import {
   onSuccessBuy
 } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Empty } from "antd";
+import { Empty, Result } from "antd";
 import Paypal from "../../util/Paypal";
 
 function CartPage(props) {
@@ -14,6 +14,7 @@ function CartPage(props) {
 
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
+  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -71,15 +72,28 @@ function CartPage(props) {
           products={props.user.cartDetail}
           removeItem={removeFromCart}
         />
-      </div>
 
-      {ShowTotal ? (
-        <div style={{ marginTop: "3rem" }}>
-          <h2>최종 금액 : {Total}원 </h2>
-        </div>
-      ) : (
-        <Empty description={false} />
-      )}
+        {ShowTotal ? (
+          <div style={{ marginTop: "3rem" }}>
+            <h2>최종 금액 : {Total}원 </h2>
+          </div>
+        ) : ShowSuccess ? (
+          <Result status="success" title="Successfully Purchased Items" />
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center"
+            }}
+          >
+            <br />
+            <Empty description={false} />
+            <p>No Items In the Cart</p>
+          </div>
+        )}
+      </div>
 
       {ShowTotal && <Paypal total={Total} onSuccess={transaction} />}
     </div>
