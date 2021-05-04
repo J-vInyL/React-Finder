@@ -150,7 +150,7 @@ router.get("/removeFromCart", auth, (req, res) => {
 router.post("/successBuy", auth, (req, res) => {
   //1. User collection 안에 history 필드 안에 간단한 결제 정보 넣어주기
   let history = [];
-  let trainsactionData = [];
+  let transactionData = [];
 
   req.body.cartDetail.forEach(item => {
     history.push({

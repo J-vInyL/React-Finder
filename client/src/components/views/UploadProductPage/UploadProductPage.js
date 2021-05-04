@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import FileUpload from "../../util/FileUpload";
-import Axios from "axios";
+import axios from "axios";
 
 //const { Title } = Typography;
 const { TextArea } = Input;
@@ -59,7 +59,7 @@ function UploadProductPage(props) {
       image: Image
     };
 
-    Axios.post("/api/product", body).then(response => {
+    axios.post("/api/product", body).then(response => {
       if (response.data.success) {
         alert("상품 업로드에 성공 했습니다.");
         props.history.push("/");

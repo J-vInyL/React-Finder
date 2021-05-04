@@ -50,7 +50,7 @@ function CartPage(props) {
     });
   };
 
-  const transaction = data => {
+  const transactionSuccess = data => {
     dispatch(
       onSuccessBuy({
         paymentData: data,
@@ -59,6 +59,7 @@ function CartPage(props) {
     ).then(response => {
       if (response.payload.success) {
         setShowTotal(false);
+        setShowSuccess(true);
       }
     });
   };
@@ -78,7 +79,7 @@ function CartPage(props) {
             <h2>최종 금액 : {Total}원 </h2>
           </div>
         ) : ShowSuccess ? (
-          <Result status="success" title="Successfully Purchased Items" />
+          <Result status="success" title="상품구매가 완료되었습니다." />
         ) : (
           <div
             style={{
@@ -90,12 +91,12 @@ function CartPage(props) {
           >
             <br />
             <Empty description={false} />
-            <p>No Items In the Cart</p>
+            <p>장바구니가 비었습니다.</p>
           </div>
         )}
       </div>
 
-      {ShowTotal && <Paypal total={Total} onSuccess={transaction} />}
+      {ShowTotal && <Paypal total={Total} onSuccess={transactionSuccess} />}
     </div>
   );
 }
