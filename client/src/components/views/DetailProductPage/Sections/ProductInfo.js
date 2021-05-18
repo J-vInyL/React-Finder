@@ -1,7 +1,9 @@
 import React from "react";
-import { Descriptions, Button } from "antd";
+import { Descriptions, Button, Row, Col, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
+import { Line } from "@ant-design/charts";
+
 function ProductInfo(props) {
   const dispatch = useDispatch();
 
@@ -10,19 +12,55 @@ function ProductInfo(props) {
     dispatch(addToCart(props.detail._id));
   };
 
+  const style = { background: "White", padding: "24px 0" };
+
+  const data = [
+    { year: "1991", value: props.detail.sold },
+    { year: "1992", value: 4 },
+    { year: "1993", value: 3.5 },
+    { year: "1994", value: 5 },
+    { year: "1995", value: 4.9 },
+    { year: "1996", value: 6 },
+    { year: "1997", value: 7 },
+    { year: "1998", value: 9 },
+    { year: "1999", value: 13 }
+  ];
+
+  const config = {
+    data,
+    height: 400,
+    xField: "year",
+    yField: "value",
+    point: {
+      size: 5,
+      shape: "diamond"
+    },
+    label: {
+      style: {
+        fill: "#aaa"
+      }
+    }
+  };
+
+  const renderSize =
+    props.detail.size &&
+    props.detail.size.map((sizes, index) => {
+      return (
+        <Row gutter={[16, 24]} key={index}>
+          <Col className="gutter-row" span={6}>
+            <div>{sizes}</div>
+          </Col>
+        </Row>
+      );
+    });
+
   return (
     <div>
-      <Descriptions title={props.detail.title}>
-        <Descriptions.Item label="Price">
-          {props.detail.price}
-        </Descriptions.Item>
-        <Descriptions.Item label="Sold">{props.detail.sold}</Descriptions.Item>
-        <Descriptions.Item label="View">{props.detail.views}</Descriptions.Item>
-        <Descriptions.Item label="Description">
-          {props.detail.description}
-        </Descriptions.Item>
-      </Descriptions>
-
+      <Divider orientation="center">사이즈</Divider>
+      {renderSize}
+      <br />
+      <br />
+      <Line {...config} />
       <br />
       <br />
       <br />

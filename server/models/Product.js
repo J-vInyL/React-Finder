@@ -19,6 +19,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0
     },
+    size: {
+      type: Array,
+      default: []
+    },
     image: {
       type: Array,
       default: []

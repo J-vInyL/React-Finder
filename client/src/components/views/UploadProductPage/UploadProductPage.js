@@ -7,17 +7,25 @@ import axios from "axios";
 const { TextArea } = Input;
 
 const Sizes = [
-  { key: 1, value: "235" },
-  { key: 2, value: "240" },
-  { key: 3, value: "245" },
-  { key: 4, value: "250" }
+  "235",
+  "240",
+  "245",
+  "250",
+  "255",
+  "260",
+  "265",
+  "270",
+  "275",
+  "280",
+  "285",
+  "290"
 ];
 
 function UploadProductPage(props) {
   const [Title, setTitle] = useState("");
   const [Description, setDescrption] = useState("");
   const [Price, setPrice] = useState(0);
-  const [Size, setSize] = useState(1);
+  //const [Size, setSize] = useState([]);
   const [Image, setImage] = useState([]);
 
   const titleChangeHandler = event => {
@@ -32,9 +40,8 @@ function UploadProductPage(props) {
     setPrice(event.currentTarget.value);
   };
 
-  const sizeChangeHandler = event => {
-    setSize(event.currentTarget.value);
-  };
+  //const sizeChangeHandler = event => {
+  //setSize(event.currentTarget.value);
 
   const updateImages = newImages => {
     setImage(newImages);
@@ -42,8 +49,9 @@ function UploadProductPage(props) {
 
   const submitHandler = event => {
     event.preventDefault();
+    //setSize([...Sizes]);
 
-    if (!Title || !Description || !Price || !Size || !Image) {
+    if (!Title || !Description || !Price || !Image) {
       //유효성 체크
       return alert("모든 값을 넣어주셔아합니다.");
     }
@@ -55,7 +63,7 @@ function UploadProductPage(props) {
       title: Title,
       description: Description,
       price: Price,
-      size: Size,
+      size: Sizes,
       image: Image
     };
 
@@ -94,15 +102,7 @@ function UploadProductPage(props) {
         <Input type="number" onChange={priceChangeHandler} value={Price} />
         <br />
         <br />
-        <select onChange={sizeChangeHandler} value={Size}>
-          {Sizes.map(item => (
-            <option key={item.key} value={item.key}>
-              {item.value}
-            </option>
-          ))}
-        </select>
-        <br />
-        <br />
+
         <button type="submit">확인</button>
       </Form>
     </div>
