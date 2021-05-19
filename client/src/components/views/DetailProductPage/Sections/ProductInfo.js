@@ -1,5 +1,5 @@
 import React from "react";
-import { Descriptions, Button, Row, Col, Divider } from "antd";
+import { Descriptions, Button, Row, Col, Divider, Card } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
 import { Line } from "@ant-design/charts";
@@ -12,7 +12,11 @@ function ProductInfo(props) {
     dispatch(addToCart(props.detail._id));
   };
 
-  const style = { background: "White", padding: "24px 0" };
+  const style = {
+    //background: "White",
+    //padding: "24px 0",
+    textAlign: "center"
+  };
 
   const data = [
     { year: "1991", value: props.detail.sold },
@@ -46,18 +50,17 @@ function ProductInfo(props) {
     props.detail.size &&
     props.detail.size.map((sizes, index) => {
       return (
-        <Row gutter={[16, 24]} key={index}>
-          <Col className="gutter-row" span={6}>
-            <div>{sizes}</div>
-          </Col>
-        </Row>
+        <Col lg={6} md={8} xs={24} key={index}>
+          <Card style={style}>{sizes}</Card>
+        </Col>
       );
     });
 
   return (
     <div>
       <Divider orientation="center">사이즈</Divider>
-      {renderSize}
+      <Row gutter={[16, 16]}>{renderSize}</Row>
+
       <br />
       <br />
       <Line {...config} />
