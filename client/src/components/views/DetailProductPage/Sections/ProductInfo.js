@@ -1,5 +1,5 @@
-import React from "react";
-import { Descriptions, Button, Row, Col, Divider, Card } from "antd";
+import React, { useState } from "react";
+import { Descriptions, Button, Row, Col, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
 import { Line } from "@ant-design/charts";
@@ -7,8 +7,11 @@ import { Line } from "@ant-design/charts";
 function ProductInfo(props) {
   const dispatch = useDispatch();
 
+  const [selectSize, setselectSize] = useState({});
+
   const clickHandler = () => {
     //필요한 정보를 cart 필드에다가 넣어준다 상품에 대한 아이디 개수
+
     dispatch(addToCart(props.detail._id));
   };
 
@@ -46,12 +49,19 @@ function ProductInfo(props) {
     }
   };
 
+  const checkSize = size => {
+    setselectSize(size);
+    return console.log("Confirm", selectSize);
+  };
+
   const renderSize =
     props.detail.size &&
     props.detail.size.map((sizes, index) => {
       return (
         <Col lg={6} md={8} xs={24} key={index}>
-          <Card style={style}>{sizes}</Card>
+          <Button size="large" shape="round" onClick={() => checkSize(sizes)}>
+            {sizes}
+          </Button>
         </Col>
       );
     });
@@ -59,11 +69,16 @@ function ProductInfo(props) {
   return (
     <div>
       <Divider orientation="center">사이즈</Divider>
-      <Row gutter={[16, 16]}>{renderSize}</Row>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Row gutter={[16, 16]}>{renderSize}</Row>
+      </div>
 
       <br />
       <br />
-      <Line {...config} />
+      <div>
+        <Line {...config} />
+      </div>
+
       <br />
       <br />
       <br />

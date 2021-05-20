@@ -55,9 +55,10 @@ export function logoutUser() {
   };
 }
 
-export function addToCart(id) {
+export function addToCart(id, size) {
   let body = {
-    productId: id
+    productId: id,
+    productSize: size
   };
   const request = axios
     .post(`${USER_SERVER}/addToCart`, body)
