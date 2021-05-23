@@ -7,18 +7,19 @@ import { Line } from "@ant-design/charts";
 function ProductInfo(props) {
   const dispatch = useDispatch();
 
-  const [selectSize, setselectSize] = useState({});
+  const [selectSize, setselectSize] = useState(0);
 
   const clickHandler = () => {
+    if (selectSize == checkSize(selectSize)) {
+      alert("Gooooood");
+      console.log(selectSize);
+      console.log(checkSize(selectSize));
+    } else {
+      alert("BAD");
+    }
+
     //필요한 정보를 cart 필드에다가 넣어준다 상품에 대한 아이디 개수
-
-    dispatch(addToCart(props.detail._id));
-  };
-
-  const style = {
-    //background: "White",
-    //padding: "24px 0",
-    textAlign: "center"
+    dispatch(addToCart(props.detail._id, selectSize));
   };
 
   const data = [
@@ -51,7 +52,9 @@ function ProductInfo(props) {
 
   const checkSize = size => {
     setselectSize(size);
-    return console.log("Confirm", selectSize);
+
+    return size;
+    //console.log("Confirm", selectSize)
   };
 
   const renderSize =

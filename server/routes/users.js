@@ -107,6 +107,7 @@ router.post("/addToCart", auth, (req, res) => {
             cart: {
               id: req.body.productId,
               quantity: 1,
+              size: req.body.productSize,
               date: Date.now()
             }
           }
@@ -192,7 +193,11 @@ router.post("/successBuy", auth, (req, res) => {
 
         let products = [];
         doc.product.forEach(item => {
-          products.push({ id: item.id, quantity: item.quantity });
+          products.push({
+            id: item.id,
+            quantity: item.quantity,
+            size: item.size
+          });
         });
 
         async.eachSeries(
