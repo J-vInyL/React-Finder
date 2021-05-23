@@ -71,6 +71,7 @@ function CartPage(props) {
       <div>
         <UserCardBlock
           products={props.user.cartDetail}
+          cofirmSize={props.user.userData}
           removeItem={removeFromCart}
         />
 

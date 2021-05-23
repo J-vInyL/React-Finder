@@ -21,7 +21,7 @@ function UserCardBlock(props) {
           />
         </td>
 
-        <td>{product.quantity} EA</td>
+        <td>{props.cofirmSize.cart[index].size} cm</td>
 
         <td> {product.price} 원</td>
 
@@ -37,7 +37,7 @@ function UserCardBlock(props) {
         <thead>
           <tr>
             <th>이미지</th>
-            <th>개수</th>
+            <th>사이즈</th>
             <th>가격</th>
             <th>삭제하기</th>
           </tr>

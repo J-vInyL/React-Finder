@@ -7,19 +7,20 @@ import { Line } from "@ant-design/charts";
 function ProductInfo(props) {
   const dispatch = useDispatch();
 
-  const [selectSize, setselectSize] = useState(0);
+  const [SelectSize, setSelectSize] = useState(0);
 
   const clickHandler = () => {
-    if (selectSize == checkSize(selectSize)) {
+    if (SelectSize == checkSize(SelectSize)) {
       alert("Gooooood");
-      console.log(selectSize);
-      console.log(checkSize(selectSize));
+      console.log(SelectSize);
+      console.log(checkSize(SelectSize));
     } else {
       alert("BAD");
     }
 
     //필요한 정보를 cart 필드에다가 넣어준다 상품에 대한 아이디 개수
-    dispatch(addToCart(props.detail._id, selectSize));
+    dispatch(addToCart(props.detail._id, SelectSize));
+    //디스패치로 user_actions으로 줄떄 값을 두개를 주면 되고
   };
 
   const data = [
@@ -51,7 +52,7 @@ function ProductInfo(props) {
   };
 
   const checkSize = size => {
-    setselectSize(size);
+    setSelectSize(size);
 
     return size;
     //console.log("Confirm", selectSize)

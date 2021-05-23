@@ -56,6 +56,7 @@ export function logoutUser() {
 }
 
 export function addToCart(id, size) {
+  //productinfo 에서 디스패치로 두 개의 값을 줬으므로 여기에서는 매개변수로 id와 size로 받아 body부문에 productid , productsize로 정의해 사용
   let body = {
     productId: id,
     productSize: size
