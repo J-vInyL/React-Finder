@@ -160,7 +160,8 @@ router.post("/successBuy", auth, (req, res) => {
       id: item._id,
       price: item.price,
       quantity: item.quantity,
-      paymentId: req.body.paymentData.paymentID
+      paymentId: req.body.paymentData.paymentID,
+      size: req.body.userData.size
     });
   });
 

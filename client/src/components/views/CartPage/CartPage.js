@@ -54,7 +54,8 @@ function CartPage(props) {
     dispatch(
       onSuccessBuy({
         paymentData: data,
-        cartDetail: props.user.cartDetail
+        cartDetail: props.user.cartDetail,
+        userData: props.user.userData.cart[0]
       })
     ).then(response => {
       if (response.payload.success) {
