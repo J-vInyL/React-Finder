@@ -153,7 +153,7 @@ router.post("/successBuy", auth, (req, res) => {
   let history = [];
   let transactionData = [];
 
-  req.body.cartDetail.forEach(item => {
+  req.body.cartDetail.forEach((item, index) => {
     history.push({
       dateOfPurchase: Date.now(),
       name: item.title,
@@ -161,7 +161,7 @@ router.post("/successBuy", auth, (req, res) => {
       price: item.price,
       quantity: item.quantity,
       paymentId: req.body.paymentData.paymentID,
-      size: req.body.userData.size
+      size: req.body.userData.cart[index].size
     });
   });
 
