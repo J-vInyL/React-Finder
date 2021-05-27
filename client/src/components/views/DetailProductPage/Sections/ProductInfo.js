@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Descriptions, Button, Row, Col, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
@@ -8,6 +8,24 @@ function ProductInfo(props) {
   const dispatch = useDispatch();
 
   const [SelectSize, setSelectSize] = useState(0);
+
+  /*useEffect(() => {
+  
+  if (props.graph && props.graph.history) {
+    props.graph.history.map((item, index) => {
+      
+         const data = [{date: item[index].size, 판매량: item[index].size}]
+      
+      
+      return (
+        data()
+      )
+     })
+  }
+  
+}, [])*/
+
+  //console.log("productinfo", props.graph.hisotry);
 
   const clickHandler = () => {
     if (SelectSize == checkSize(SelectSize)) {
@@ -24,22 +42,17 @@ function ProductInfo(props) {
   };
 
   const data = [
-    { year: "1991", value: props.detail.sold },
-    { year: "1992", value: 4 },
-    { year: "1993", value: 3.5 },
-    { year: "1994", value: 5 },
-    { year: "1995", value: 4.9 },
-    { year: "1996", value: 6 },
-    { year: "1997", value: 7 },
-    { year: "1998", value: 9 },
-    { year: "1999", value: 13 }
+    {
+      date: props.detail.size,
+      판매량: props.detail.size
+    }
   ];
 
   const config = {
     data,
     height: 400,
-    xField: "year",
-    yField: "value",
+    xField: "date",
+    yField: "판매량",
     point: {
       size: 5,
       shape: "diamond"
@@ -53,7 +66,7 @@ function ProductInfo(props) {
 
   const checkSize = size => {
     setSelectSize(size);
-
+    console.log("test", props.graph.history[2].name);
     return size;
     //console.log("Confirm", selectSize)
   };

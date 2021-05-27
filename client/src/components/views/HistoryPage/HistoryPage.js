@@ -4,7 +4,7 @@ function HistoryPage(props) {
   return (
     <div style={{ width: "80%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
-        <h1>History</h1>
+        <h1>결제 내역</h1>
       </div>
       <br />
 
@@ -13,7 +13,7 @@ function HistoryPage(props) {
           <tr>
             <th>결제 아이디</th>
             <th>가격</th>
-            <th>판매 수량</th>
+            <th>사이즈 </th>
             <th>구매일</th>
           </tr>
         </thead>
@@ -25,7 +25,7 @@ function HistoryPage(props) {
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.price}</td>
-                <td>{item.quantity}</td>
+                <td>{item.size}</td>
                 <td>{item.dateOfPurchase}</td>
               </tr>
             ))}

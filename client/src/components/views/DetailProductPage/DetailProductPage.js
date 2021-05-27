@@ -8,12 +8,15 @@ function DetailProductPage(props) {
   const productId = props.match.params.productId;
 
   const [Product, setProduct] = useState({});
+  const [Graphdata, setGraphdata] = useState({});
 
   useEffect(() => {
     axios
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then(response => {
         setProduct(response.data[0]);
+        setGraphdata(response.data[0].writer);
+        console.log("DetailWriter", response.data[0].writer);
       })
       .catch(err => alert(err));
   }, []);
@@ -33,7 +36,7 @@ function DetailProductPage(props) {
 
         <Col lg={12} xs={24}>
           {/* ProductInfo */}
-          <ProductInfo detail={Product} />
+          <ProductInfo detail={Product} graph={Graphdata} />
         </Col>
       </Row>
     </div>
