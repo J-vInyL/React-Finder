@@ -9,24 +9,6 @@ function ProductInfo(props) {
 
   const [SelectSize, setSelectSize] = useState(0);
 
-  /*useEffect(() => {
-  
-  if (props.graph && props.graph.history) {
-    props.graph.history.map((item, index) => {
-      
-         const data = [{date: item[index].size, 판매량: item[index].size}]
-      
-      
-      return (
-        data()
-      )
-     })
-  }
-  
-}, [])*/
-
-  //console.log("productinfo", props.graph.hisotry);
-
   const clickHandler = () => {
     if (SelectSize == checkSize(SelectSize)) {
       alert("Gooooood");
@@ -43,16 +25,16 @@ function ProductInfo(props) {
 
   const data = [
     {
-      date: props.detail.size,
-      판매량: props.detail.size
+      sold: props.detail.sold,
+      year: props.detail.createdAt
     }
   ];
 
   const config = {
     data,
     height: 400,
-    xField: "date",
-    yField: "판매량",
+    xField: "year",
+    yField: "sold",
     point: {
       size: 5,
       shape: "diamond"
@@ -66,7 +48,7 @@ function ProductInfo(props) {
 
   const checkSize = size => {
     setSelectSize(size);
-    console.log("test", props.graph.history[2].name);
+    console.log("test", props.graph[2].price);
     return size;
     //console.log("Confirm", selectSize)
   };
