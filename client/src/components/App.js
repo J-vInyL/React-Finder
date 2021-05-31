@@ -29,7 +29,7 @@ function App() {
           <Route
             exact
             path="/product/upload"
-            component={Auth(UploadProductPage, true)}
+            component={Auth(UploadProductPage, true, 1)}
           />
           <Route
             exact

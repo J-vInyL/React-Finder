@@ -8,29 +8,31 @@ function HistoryPage(props) {
       </div>
       <br />
 
-      <table>
-        <thead>
-          <tr>
-            <th>결제 아이디</th>
-            <th>가격</th>
-            <th>사이즈 </th>
-            <th>구매일</th>
-          </tr>
-        </thead>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>상품명</th>
+              <th>가격</th>
+              <th>사이즈 </th>
+              <th>구매일</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {props.user.userData &&
-            props.user.userData.history &&
-            props.user.userData.history.map(item => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.price}</td>
-                <td>{item.size}</td>
-                <td>{item.dateOfPurchase}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+          <tbody>
+            {props.user.userData &&
+              props.user.userData.history &&
+              props.user.userData.history.map(item => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>{item.size}</td>
+                  <td>{item.dateOfPurchase}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
