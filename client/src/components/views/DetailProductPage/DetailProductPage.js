@@ -16,7 +16,8 @@ function DetailProductPage(props) {
       .then(response => {
         setProduct(response.data[0]);
         //setGraphdata(response.data[0].writer.history);
-        console.log("detailTest", response.data[0]);
+
+        console.log("detail", response.data[0]);
         //console.log("DetailWriter", response.data[0].writer.history[1]);
       })
       .catch(err => alert(err));

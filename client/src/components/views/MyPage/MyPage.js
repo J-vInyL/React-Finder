@@ -1,29 +1,37 @@
-import React from "react";
-import { Layout, Menu } from "antd";
+import React, { useEffect, useState } from "react";
+import { Card, Avatar } from "antd";
+import { useSelector } from "react-redux";
 
-function MyPage() {
-  const { SubMenu } = Menu;
-  const { Header, Content, Sider } = Layout;
+const { Meta } = Card;
+
+function Mypage(props) {
+  const user = useSelector(state => state.user);
+
+  const isAdmin = () => {
+    if (user.userData && user.userData.isAdmin) {
+      return "관리자";
+    } else {
+      return "사용자";
+    }
+  };
 
   return (
-    <Layout>
-      <Sider width={200} className="site-layout-background">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          style={{ height: "100%", borderRight: 0 }}
-        >
-          <SubMenu key="sub1" title="subnav 1">
-            <Menu.Item key="1">option1</Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
-          </SubMenu>
-        </Menu>
-      </Sider>
-    </Layout>
+    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="site-card-border-less-wrapper">
+          <Card style={{ width: 300 }}>
+            <Avatar
+              style={{ justifyContent: "left" }}
+              src={user.userData && user.userData.image}
+            />
+            <p>이메일 : {user.userData && user.userData.email}</p>
+            <p>아이디 : {user.userData && user.userData.name}</p>
+            <p>상태 : {isAdmin()}</p>
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default MyPage;
+export default Mypage;

@@ -11,7 +11,7 @@ import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import CartPage from "./views/CartPage/CartPage";
 import HisotryPage from "./views/HistoryPage/HistoryPage";
-import MyPage from "./views/MyPage/MyPage";
+import MyPage from "./views/Mypage/Mypage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
