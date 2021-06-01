@@ -1,12 +1,12 @@
 import React from "react";
 import { Menu } from "antd";
-//import SearchFeature from "../../LandingPage/Sections/SearchFeature";
+import SearchFeature from "../../LandingPage/Sections/SearchFeature";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    /*<div
+    <div
       style={{
         display: "flex",
         justifyContent: "flex-end",
@@ -14,9 +14,9 @@ function LeftMenu(props) {
       }}
     >
       <SearchFeature />
-    </div>*/
+    </div>
 
-    <Menu mode={props.mode}>
+    /*<Menu mode={props.mode}>
       <Menu.Item key="mail">
         <a href="/">Home</a>
       </Menu.Item>
@@ -29,7 +29,7 @@ function LeftMenu(props) {
           <Menu.Item key="setting:4">Option 4</Menu.Item>
         </MenuItemGroup>
       </SubMenu>
-    </Menu>
+    </Menu>*/
   );
 }
 
