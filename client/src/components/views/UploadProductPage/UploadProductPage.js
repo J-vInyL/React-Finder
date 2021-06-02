@@ -94,7 +94,7 @@ function UploadProductPage(props) {
         <Input onChange={titleChangeHandler} value={Title} />
         <br />
         <br />
-        <label>설명</label>
+        <label>브랜드</label>
         <TextArea onChange={descriptonChangeHandler} value={Description} />
         <br />
         <br />

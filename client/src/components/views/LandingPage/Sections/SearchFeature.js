@@ -9,6 +9,7 @@ function SearchFeature(props) {
   const searchHandler = event => {
     setSearchTerm(event.currentTarget.value);
     props.refreshFunction(event.currentTarget.value);
+    //console.log("Test")
   };
 
   return (

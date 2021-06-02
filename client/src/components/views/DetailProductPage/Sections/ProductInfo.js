@@ -11,11 +11,11 @@ function ProductInfo(props) {
 
   const clickHandler = () => {
     if (SelectSize == checkSize(SelectSize)) {
-      alert("Gooooood");
+      alert("장바구니에 추가되었습니다.");
       console.log(SelectSize);
       console.log(checkSize(SelectSize));
     } else {
-      alert("BAD");
+      alert("오류입니다. 다시시도해주세요");
     }
 
     //필요한 정보를 cart 필드에다가 넣어준다 상품에 대한 아이디 개수
@@ -48,7 +48,7 @@ function ProductInfo(props) {
 
   const checkSize = size => {
     setSelectSize(size);
-    console.log("test", props.graph[2].price);
+    //console.log("test", props.graph[2].price);
     return size;
     //console.log("Confirm", selectSize)
   };

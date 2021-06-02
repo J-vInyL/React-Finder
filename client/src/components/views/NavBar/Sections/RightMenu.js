@@ -32,12 +32,12 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="history">
-          <a href="/history">구매내역</a>
-        </Menu.Item>
-
         <Menu.Item key="upload">
           <a href="/product/upload">제품등록</a>
+        </Menu.Item>
+
+        <Menu.Item key="history">
+          <a href="/history">구매내역</a>
         </Menu.Item>
 
         <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
