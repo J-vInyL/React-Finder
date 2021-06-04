@@ -108,7 +108,7 @@ router.post("/products", (req, res) => {
   } else {
     Product.find(findArgs)
       .populate("writer")
-      .sort({ sold: 1 }) //views를 오름차순으로 정렬
+      //.sort({ sold: 1 }) //views를 오름차순으로 정렬
       .skip(skip)
       .limit(limit) //처음 페이지 부분  몇개 가줘올지 설정
       .exec((err, productInfo) => {

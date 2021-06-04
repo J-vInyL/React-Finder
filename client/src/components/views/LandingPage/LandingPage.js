@@ -175,7 +175,7 @@ function LandingPage() {
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
-          인기 상품 <Icon type="rocket" />{" "}
+          인기 상품 <Icon type="like" />{" "}
         </h2>
       </div>
 
@@ -217,7 +217,7 @@ function LandingPage() {
 
       <div style={{ textAlign: "center" }}>
         <h2>
-          발매 상품 <Icon type="like" />{" "}
+          발매 상품 <Icon type="rocket" />{" "}
         </h2>
       </div>
 
