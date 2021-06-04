@@ -43,6 +43,23 @@ router.post("/", (req, res) => {
   });
 });
 
+//popular 가져오기
+router.post("/popular", (req, res) => {
+  let limit2 = req.body.limit2;
+
+  Product.find()
+    .populate("writer")
+    .sort({ sold: -1 }) //views를 오름차순으로 정렬
+    .limit(limit2) //처음 페이지 부분  몇개 가줘올지 설정
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({
+        success: true,
+        productInfo
+      });
+    });
+});
+
 router.post("/products", (req, res) => {
   //product 콜렉션에 들어 있는 모든 상품 정보를 가져오기
 
@@ -91,6 +108,7 @@ router.post("/products", (req, res) => {
   } else {
     Product.find(findArgs)
       .populate("writer")
+      .sort({ sold: 1 }) //views를 오름차순으로 정렬
       .skip(skip)
       .limit(limit) //처음 페이지 부분  몇개 가줘올지 설정
       .exec((err, productInfo) => {
@@ -119,10 +137,11 @@ router.get("/products_by_id", (req, res) => {
   }
 
   //productId를 이용해서 DB에서  productId와 같은 상품의 정보를 가져온다.
-
   Product.find({ _id: { $in: productIds } })
     .populate("writer")
+    //.update({ _id: productIds }, { $inc: { views: 1 } }, { new: false })
     .exec((err, product) => {
+      //console.log(product);
       if (err) return res.status(400).send(err);
       return res.status(200).send(product);
     });

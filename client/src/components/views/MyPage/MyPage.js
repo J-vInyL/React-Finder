@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Avatar } from "antd";
 import { useSelector } from "react-redux";
-
-const { Meta } = Card;
 
 function Mypage(props) {
   const user = useSelector(state => state.user);

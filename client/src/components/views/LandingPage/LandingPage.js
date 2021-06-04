@@ -11,8 +11,10 @@ import { brand, price } from "./Sections/Datas";
 
 function LandingPage() {
   const [Product, setProduct] = useState([]);
+  const [Popular, setPopular] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
+  const [PopularLimit, setPopularLimit] = useState(4);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({ brand: [], price: [] });
   const [SearchTerm, setSearchTerm] = useState("");
@@ -20,9 +22,12 @@ function LandingPage() {
   useEffect(() => {
     let body = {
       skip: Skip,
-      limit: Limit
+      limit: Limit,
+      limit2: PopularLimit
     };
+
     getProducts(body);
+    getPopular(body);
   }, []);
 
   const getProducts = body => {
@@ -34,6 +39,17 @@ function LandingPage() {
           setProduct(response.data.productInfo);
         }
         setPostSize(response.data.postSize);
+      } else {
+        alert("상품을 가져오는데 실패 했습니다.");
+      }
+    });
+  };
+
+  //popular 만 받아오기
+  const getPopular = value => {
+    axios.post("/api/product/popular", value).then(response => {
+      if (response.data.success) {
+        setPopular(response.data.productInfo);
       } else {
         alert("상품을 가져오는데 실패 했습니다.");
       }
@@ -71,6 +87,23 @@ function LandingPage() {
       </Col>
     );
   });
+
+  const popularrenderCards = Popular.map((popular, index) => {
+    return (
+      <Col lg={6} md={8} xs={24} key={index}>
+        <Card
+          cover={
+            <a href={`/product/${popular._id}`}>
+              <ImageSlider image={popular.image} />
+            </a>
+          }
+        >
+          <Meta title={popular.title} description={`${popular.price} 원`} />
+        </Card>
+      </Col>
+    );
+  });
+
   const showFilterResults = filters => {
     let body = {
       skip: 0,
@@ -142,29 +175,35 @@ function LandingPage() {
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
-          발매 상품 <Icon type="rocket" />{" "}
+          인기 상품 <Icon type="rocket" />{" "}
         </h2>
       </div>
 
-      {/* Filter */}
+      <Row gutter={[16, 16]}>{popularrenderCards}</Row>
+      <br />
+
+      {/* Filter 
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
-          {/* FilterMenu */}
+        */}
+      {/* FilterMenu 
           <FilterMenu
             list={brand}
             handleFilters={filters => handleFilters(filters, "brand")}
           />
         </Col>
         <Col lg={12} xs={24}>
-          {/* PriceMenu  */}
+        */}
+      {/* PriceMenu  
           <PriceMenu
             list={price}
             handleFilters={filters => handleFilters(filters, "price")}
           />
         </Col>
       </Row>
+      */}
 
-      {/* Search */}
+      {/* Search 
       <div
         style={{
           display: "flex",
@@ -173,6 +212,13 @@ function LandingPage() {
         }}
       >
         <SearchFeature refreshFunction={updateSearchTerm} />
+      </div>
+      */}
+
+      <div style={{ textAlign: "center" }}>
+        <h2>
+          발매 상품 <Icon type="like" />{" "}
+        </h2>
       </div>
 
       {/* Cards */}

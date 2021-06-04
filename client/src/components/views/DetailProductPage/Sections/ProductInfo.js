@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Descriptions, Button, Row, Col, Divider } from "antd";
+import React, { useState } from "react";
+import { Button, Row, Col, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
 import { Line } from "@ant-design/charts";
