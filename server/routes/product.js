@@ -67,8 +67,8 @@ router.post("/products", (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let term = req.body.searchTerm;
 
-  let findArgs = {};
-
+  //let findArgs = {};
+  /*
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       /*if (key === "price") {
@@ -78,6 +78,7 @@ router.post("/products", (req, res) => {
         console.log(" else productkey", key);
         findArgs[key] = req.body.filters[key];
       }*/
+  /*
       if (key === "price") {
         findArgs[key] = {
           $gte: req.body.filters[key][0],
@@ -90,10 +91,10 @@ router.post("/products", (req, res) => {
   }
 
   console.log("findargs", findArgs);
-
+*/
   if (term) {
-    Product.find(findArgs)
-      .find({ $text: { $search: term } })
+    Product.find()
+      .find({ title: { $regex: term, $options: "i" } })
       .populate("writer")
       .skip(skip)
       .limit(limit) //처음 페이지 부분  몇개 가줘올지 설정
@@ -106,7 +107,7 @@ router.post("/products", (req, res) => {
         });
       });
   } else {
-    Product.find(findArgs)
+    Product.find()
       .populate("writer")
       //.sort({ sold: 1 }) //views를 오름차순으로 정렬
       .skip(skip)

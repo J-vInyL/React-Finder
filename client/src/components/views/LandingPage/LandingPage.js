@@ -173,6 +173,10 @@ function LandingPage() {
 
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
+      {/* Search */}
+      <div>
+        <SearchFeature refreshFunction={updateSearchTerm} />
+      </div>
       <div style={{ textAlign: "center" }}>
         <h2>
           인기 상품 <Icon type="like" />{" "}
@@ -201,18 +205,6 @@ function LandingPage() {
           />
         </Col>
       </Row>
-      */}
-
-      {/* Search 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: "1rem auto"
-        }}
-      >
-        <SearchFeature refreshFunction={updateSearchTerm} />
-      </div>
       */}
 
       <div style={{ textAlign: "center" }}>
