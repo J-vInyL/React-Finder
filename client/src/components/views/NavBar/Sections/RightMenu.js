@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Icon, Badge } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
@@ -7,6 +7,12 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector(state => state.user);
+
+  const [visible, setVisible] = useState(false);
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
@@ -29,13 +35,25 @@ function RightMenu(props) {
         </Menu.Item>
       </Menu>
     );
-  } else {
+  } else if (user.userData && user.userData.isAdmin) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="upload">
           <a href="/product/upload">제품등록</a>
         </Menu.Item>
 
+        <Menu.Item key="mypage">
+          <a href="/mypage">마이페이지</a>
+        </Menu.Item>
+
+        <Menu.Item key="logout">
+          <a onClick={logoutHandler}>로그아웃</a>
+        </Menu.Item>
+      </Menu>
+    );
+  } else {
+    return (
+      <Menu mode={props.mode}>
         <Menu.Item key="history">
           <a href="/history">구매내역</a>
         </Menu.Item>
