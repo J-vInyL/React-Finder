@@ -1,15 +1,24 @@
+- [완성된 사이트 바로가기](http://ec2-3-35-52-99.ap-northeast-2.compute.amazonaws.com/)
+
 ※ 상품을 등록하거나 수정하는 기능은 관리자 계정으로만 이용할 수 있습니다.
 
 ```
-Email : admin@admin
-Password : 추후공개
+Email : admin@admin.com
+Password : adminadmin
 ```
 
 ※ 회원가입이 번거로우신 분들은 아래의 계정을 이용해 주세요.
 
 ```
-Email : guest@guest
-Password: 추후공개
+Email : guest@guest.com
+Password: guestguest
+```
+
+※ Paypal 결제는 이걸로 해주세요.
+
+```
+ID : sb-h5gzd5876891@personal.example.com
+Password: adminadmin
 ```
 
 ## 1. 기능 소개
@@ -63,8 +72,6 @@ Password: 추후공개
 5-2. 상품 등록
   > Mongo DB를 이용하여 상품 이미지 업로드
   > 브랜드 와 내용 추가 가능
-5-3. 상품 수정
-5-4. 상품 삭제
 ```
 
 6. Payment
@@ -73,6 +80,9 @@ Password: 추후공개
 6-1. 결제
   > Paypal compoment를 사용하여 임의의 결제가 가능하게 하여 현실결제와 똑같은 기능 구현
 ```
+
+Paypal 에서 KRW(원화) 를 지원해주지 않아 USD로 진행됨
+[Paypal SDK currency 확인](https://developer.paypal.com/docs/checkout/reference/customize-sdk/)
 
 ## 2. 사용도구
 
