@@ -1,4 +1,4 @@
-- [완성된 사이트 바로가기](http://ec2-3-35-52-99.ap-northeast-2.compute.amazonaws.com/)
+- [완성된 사이트 바로가기](http://ec2-3-35-52-99.ap-northeast-2.compute.amazonaws.com/)
 
 ※ 상품을 등록하거나 수정하는 기능은 관리자 계정으로만 이용할 수 있습니다.
 

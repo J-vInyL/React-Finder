@@ -15,7 +15,7 @@ function DetailProductPage(props) {
       .then(response => {
         setProduct(response.data[0]);
         //let count = response.data[0].views;
-        console.log("test", response.data[0]);
+        console.log("test", response.data[0].writer);
       })
       .catch(err => alert(err));
   }, []);

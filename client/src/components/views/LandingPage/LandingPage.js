@@ -82,7 +82,7 @@ function LandingPage() {
             </a>
           }
         >
-          <Meta title={product.title} description={`${product.price} 원`} />
+          <Meta title={product.title} description={`${product.price} USD`} />
         </Card>
       </Col>
     );
@@ -98,7 +98,7 @@ function LandingPage() {
             </a>
           }
         >
-          <Meta title={popular.title} description={`${popular.price} 원`} />
+          <Meta title={popular.title} description={`${popular.price} USD`} />
         </Card>
       </Col>
     );
@@ -185,27 +185,6 @@ function LandingPage() {
 
       <Row gutter={[16, 16]}>{popularrenderCards}</Row>
       <br />
-
-      {/* Filter 
-      <Row gutter={[16, 16]}>
-        <Col lg={12} xs={24}>
-        */}
-      {/* FilterMenu 
-          <FilterMenu
-            list={brand}
-            handleFilters={filters => handleFilters(filters, "brand")}
-          />
-        </Col>
-        <Col lg={12} xs={24}>
-        */}
-      {/* PriceMenu  
-          <PriceMenu
-            list={price}
-            handleFilters={filters => handleFilters(filters, "price")}
-          />
-        </Col>
-      </Row>
-      */}
 
       <div style={{ textAlign: "center" }}>
         <h2>

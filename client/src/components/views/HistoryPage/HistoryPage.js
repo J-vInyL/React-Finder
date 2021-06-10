@@ -13,7 +13,7 @@ function HistoryPage(props) {
           <thead>
             <tr>
               <th>상품명</th>
-              <th>가격</th>
+              <th>가격(USD)</th>
               <th>사이즈 </th>
               <th>구매일</th>
             </tr>

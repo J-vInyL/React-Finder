@@ -11,7 +11,6 @@ function ProductInfo(props) {
 
   const clickHandler = () => {
     if (SelectSize == checkSize(SelectSize)) {
-      alert("장바구니에 추가되었습니다.");
       console.log(SelectSize);
       console.log(checkSize(SelectSize));
     } else {

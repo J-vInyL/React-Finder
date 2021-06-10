@@ -67,31 +67,6 @@ router.post("/products", (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let term = req.body.searchTerm;
 
-  //let findArgs = {};
-  /*
-  for (let key in req.body.filters) {
-    if (req.body.filters[key].length > 0) {
-      /*if (key === "price") {
-        console.log("productkey", key);
-        findArgs[key] = req.body.filters[key];
-      } else {
-        console.log(" else productkey", key);
-        findArgs[key] = req.body.filters[key];
-      }*/
-  /*
-      if (key === "price") {
-        findArgs[key] = {
-          $gte: req.body.filters[key][0],
-          $lte: req.body.filters[key][1]
-        };
-      } else {
-        findArgs[key] = req.body.filters[key];
-      }
-    }
-  }
-
-  console.log("findargs", findArgs);
-*/
   if (term) {
     Product.find()
       .find({ title: { $regex: term, $options: "i" } })
