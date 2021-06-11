@@ -123,6 +123,17 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
+router.delete("/products_by_id_delete", (req, res) => {
+  let deleteproductIds = req.query.id;
+
+  let deleteids = req.query.id.split(",");
+  deleteproductIds = deleteids.map(item => {
+    return item;
+  });
+
+  Product.deleteOne({ _id: { $in: deleteproductIds } }).exec();
+});
+
 //axios.get(`/api/product/products_by_id?id=${productId}&type=single`);
 
 module.exports = router;

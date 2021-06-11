@@ -2,12 +2,29 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductImage from "./Sections/ProductImage";
 import ProductInfo from "./Sections/ProductInfo";
-import { Row, Col } from "antd";
+import { Row, Col, Button, Modal } from "antd";
 
 function DetailProductPage(props) {
   const productId = props.match.params.productId;
 
   const [Product, setProduct] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    axios
+      .delete(`/api/product/products_by_id_delete?id=${productId}`)
+      .then(alert("삭제 완료"));
+    props.history.push("/");
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     axios
@@ -37,6 +54,21 @@ function DetailProductPage(props) {
           {/* ProductInfo */}
           <ProductInfo detail={Product} />
         </Col>
+        <br />
+        <br />
+        <div>
+          <Button size="small" shape="round" onClick={showModal}>
+            삭제
+          </Button>
+          <Modal
+            title="경고"
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <p>정말로 삭제 하시겠습니까?</p>
+          </Modal>
+        </div>
       </Row>
     </div>
   );
