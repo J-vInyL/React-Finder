@@ -31,7 +31,6 @@ function DetailProductPage(props) {
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then(response => {
         setProduct(response.data[0]);
-        //let count = response.data[0].views;
         console.log("test", response.data[0].writer);
       })
       .catch(err => alert(err));
@@ -57,7 +56,7 @@ function DetailProductPage(props) {
         <br />
         <br />
         <div>
-          <Button size="small" shape="round" onClick={showModal}>
+          <Button size="small" shape="round" type="primary" onClick={showModal}>
             삭제
           </Button>
           <Modal
@@ -68,6 +67,14 @@ function DetailProductPage(props) {
           >
             <p>정말로 삭제 하시겠습니까?</p>
           </Modal>
+          <Button
+            size="small"
+            shape="round"
+            type="primary"
+            href={`/product/update/${productId}`}
+          >
+            수정
+          </Button>
         </div>
       </Row>
     </div>

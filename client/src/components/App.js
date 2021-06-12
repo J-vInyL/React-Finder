@@ -9,6 +9,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
+import UpdateProductPage from "./views/UpdateProductPage/UpdateProductPage";
 import CartPage from "./views/CartPage/CartPage";
 import HisotryPage from "./views/HistoryPage/HistoryPage";
 import MyPage from "./views/Mypage/Mypage";
@@ -30,6 +31,11 @@ function App() {
             exact
             path="/product/upload"
             component={Auth(UploadProductPage, true, 1)}
+          />
+          <Route
+            exact
+            path="/product/update/:updateId"
+            component={Auth(UpdateProductPage, true, 1)}
           />
           <Route
             exact
