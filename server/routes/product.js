@@ -134,6 +134,35 @@ router.delete("/products_by_id_delete", (req, res) => {
   Product.deleteOne({ _id: { $in: deleteproductIds } }).exec();
 });
 
+router.get("/products_by_id_get_update", (req, res) => {
+  Product.find({ _id: { $in: req.query.id } }).exec((err, product) => {
+    //console.log(product);
+    if (err) return res.status(400).send(err);
+    return res.status(200).send(product);
+  });
+});
+
+router.post("/products_by_id_update", (req, res) => {
+  let updatetitle = req.body.title;
+  let updatedescription = req.body.description;
+  let updateprice = req.body.price;
+
+  Product.update(
+    { _id: { $in: req.body.id } },
+    {
+      $set: {
+        title: updatetitle,
+        description: updatedescription,
+        price: updateprice
+      }
+    }
+  )
+  .exec(err => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+});
+
 //axios.get(`/api/product/products_by_id?id=${productId}&type=single`);
 
 module.exports = router;
