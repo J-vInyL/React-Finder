@@ -99,7 +99,7 @@ Paypal 에서 KRW(원화) 를 지원해주지 않아 USD로 진행됨
 
 - Node.js(Express)
 - MongoDB(Atlas)
-- AWS EC2 , S3
+- AWS EC2
 
 ### Util
 

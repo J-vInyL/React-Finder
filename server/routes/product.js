@@ -134,6 +134,7 @@ router.delete("/products_by_id_delete", (req, res) => {
   Product.deleteOne({ _id: { $in: deleteproductIds } }).exec();
 });
 
+//업데이트 액션이 일어나면 먼저 저장되어있는 데이터들을 보여주기 위함
 router.get("/products_by_id_get_update", (req, res) => {
   Product.find({ _id: { $in: req.query.id } }).exec((err, product) => {
     //console.log(product);
@@ -142,6 +143,7 @@ router.get("/products_by_id_get_update", (req, res) => {
   });
 });
 
+//수정 할 body를 받아온 후 DB에 새롭게 업데이트
 router.post("/products_by_id_update", (req, res) => {
   let updatetitle = req.body.title;
   let updatedescription = req.body.description;
@@ -156,8 +158,7 @@ router.post("/products_by_id_update", (req, res) => {
         price: updateprice
       }
     }
-  )
-  .exec(err => {
+  ).exec(err => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({ success: true });
   });
