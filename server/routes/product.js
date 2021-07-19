@@ -1,35 +1,53 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const multer3 = require("multer-s3");
+const aws = require("aws-sdk");
 const { Product } = require("../models/Product");
+require("dotenv").config();
+//aws.config.loadFromPath("../config/s3.json");
 
 //=================================
 //             Product
 //=================================
 
-var storage = multer.diskStorage({
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
+
+//s3 저장
+const upload = multer({
+  storage: multer3({
+    s3: s3,
+    bucket: process.env.BUCKET_NAME,
+    acl: "public-read-write",
+    key: function (req, file, cb) {
+      cb(null, `${Date.now()}_${file.originalname}`);
+    }
+  })
+});
+
+//로컬 저장
+/*var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}_${file.originalname}`);
   }
-});
+});*/
 
-var upload = multer({ storage: storage }).single("file");
+//var upload = multer({ storage: storage }).single("file");
 
-router.post("/image", (req, res) => {
+router.post("/image", upload.single("file"), (req, res) => {
   //가져온 이미지를 저장한다.
-
-  upload(req, res, err => {
-    if (err) {
-      return req.json({ success: false, err });
-    }
-    return res.json({
-      success: true,
-      filePath: res.req.file.path,
-      fileName: res.req.file.filename
-    });
+  console.log("test", req.file);
+  return res.json({
+    success: true,
+    filePath: req.file.location,
+    fileName: req.file.key
   });
 });
 

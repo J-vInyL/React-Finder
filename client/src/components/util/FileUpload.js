@@ -18,6 +18,7 @@ function FileUpload(props) {
       .post("/api/product/image", formData, config) //엔드포인트로 주면서 폼데이터와 콘피그 post
       .then(response => {
         if (response.data.success) {
+          console.log(response.data);
           setImage([...Image, response.data.filePath]);
           props.refreshFunction([...Image, response.data.filePath]);
         } else {
