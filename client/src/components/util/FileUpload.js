@@ -18,7 +18,7 @@ function FileUpload(props) {
       .post("/api/product/image", formData, config) //엔드포인트로 주면서 폼데이터와 콘피그 post
       .then(response => {
         if (response.data.success) {
-          console.log(response.data);
+          console.log("front", response.data);
           setImage([...Image, response.data.filePath]);
           props.refreshFunction([...Image, response.data.filePath]);
         } else {
@@ -71,7 +71,7 @@ function FileUpload(props) {
           <div onClick={() => deleteHandler(image)} key={index}>
             <img
               style={{ minwidth: "300px", width: "300px", height: "240px" }}
-              src={`http://localhost:5000/${image}`}
+              src={`${image}`}
             />
           </div>
         ))}
